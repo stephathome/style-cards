@@ -156,6 +156,23 @@ h1{font-size:clamp(2rem,8vw,3.25rem);line-height:1.03;margin:.35rem 0 .8rem;lett
   .styling-tip{border-left:0;border-top:1px solid var(--line);padding:14px 0 0}
 }
 
+
+/* V13 status controls: native checkbox behavior for reliable tap-to-unselect on iPhone */
+.seg .status-choice{display:block;min-width:0;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.seg .status-choice input{position:absolute;opacity:0;pointer-events:none;width:1px;height:1px}
+.seg .status-choice span{
+  min-height:46px;border:1px solid #d8cfc6;border-radius:13px;background:#fff;color:#403a35;
+  font-weight:800;font-size:.94rem;padding:10px 8px;display:flex;align-items:center;justify-content:center;
+  text-align:center;box-sizing:border-box;user-select:none;-webkit-user-select:none
+}
+.seg.compact .status-choice span{min-height:40px;font-size:.84rem}
+.seg .status-choice input[data-set="own"]:checked + span{
+  background:#e8f0e9;border-color:#adc0b1;color:#314f38
+}
+.seg .status-choice input[data-set="need"]:checked + span{
+  background:#f2e3d4;border-color:#c99b73;color:#6b4428
+}
+
 </style>
 </head>
 <body>
@@ -183,8 +200,14 @@ h1{font-size:clamp(2rem,8vw,3.25rem);line-height:1.03;margin:.35rem 0 .8rem;lett
 <span class="shop-arrow">›</span>
 </a>
 <div aria-label="Status for Colorblock sweater" class="seg compact" role="group">
-<button data-set="own" type="button">Already own</button>
-<button data-set="need" type="button">Need</button>
+<label class="status-choice">
+<input data-set="own" type="checkbox" />
+<span>Already own</span>
+</label>
+<label class="status-choice">
+<input data-set="need" type="checkbox" />
+<span>Need</span>
+</label>
 </div>
 </div>
 <div class="shop-row" data-item="jeans">
@@ -193,8 +216,14 @@ h1{font-size:clamp(2rem,8vw,3.25rem);line-height:1.03;margin:.35rem 0 .8rem;lett
 <span class="shop-arrow">›</span>
 </a>
 <div aria-label="Status for Medium-wash straight / slim-straight jeans" class="seg compact" role="group">
-<button data-set="own" type="button">Already own</button>
-<button data-set="need" type="button">Need</button>
+<label class="status-choice">
+<input data-set="own" type="checkbox" />
+<span>Already own</span>
+</label>
+<label class="status-choice">
+<input data-set="need" type="checkbox" />
+<span>Need</span>
+</label>
 </div>
 </div>
 <div class="shop-row" data-item="flats">
@@ -203,8 +232,14 @@ h1{font-size:clamp(2rem,8vw,3.25rem);line-height:1.03;margin:.35rem 0 .8rem;lett
 <span class="shop-arrow">›</span>
 </a>
 <div aria-label="Status for Black pointed-toe flats — no big bow" class="seg compact" role="group">
-<button data-set="own" type="button">Already own</button>
-<button data-set="need" type="button">Need</button>
+<label class="status-choice">
+<input data-set="own" type="checkbox" />
+<span>Already own</span>
+</label>
+<label class="status-choice">
+<input data-set="need" type="checkbox" />
+<span>Need</span>
+</label>
 </div>
 </div>
 <div class="shop-row" data-item="earrings">
@@ -213,8 +248,14 @@ h1{font-size:clamp(2rem,8vw,3.25rem);line-height:1.03;margin:.35rem 0 .8rem;lett
 <span class="shop-arrow">›</span>
 </a>
 <div aria-label="Status for Nickel-free black geometric earrings" class="seg compact" role="group">
-<button data-set="own" type="button">Already own</button>
-<button data-set="need" type="button">Need</button>
+<label class="status-choice">
+<input data-set="own" type="checkbox" />
+<span>Already own</span>
+</label>
+<label class="status-choice">
+<input data-set="need" type="checkbox" />
+<span>Need</span>
+</label>
 </div>
 </div>
 <div class="shop-row" data-item="bag">
@@ -223,8 +264,14 @@ h1{font-size:clamp(2rem,8vw,3.25rem);line-height:1.03;margin:.35rem 0 .8rem;lett
 <span class="shop-arrow">›</span>
 </a>
 <div aria-label="Status for Colorblock crossbody bag" class="seg compact" role="group">
-<button data-set="own" type="button">Already own</button>
-<button data-set="need" type="button">Need</button>
+<label class="status-choice">
+<input data-set="own" type="checkbox" />
+<span>Already own</span>
+</label>
+<label class="status-choice">
+<input data-set="need" type="checkbox" />
+<span>Need</span>
+</label>
 </div>
 </div>
 <div class="shop-row" data-item="sunglasses">
@@ -233,8 +280,14 @@ h1{font-size:clamp(2rem,8vw,3.25rem);line-height:1.03;margin:.35rem 0 .8rem;lett
 <span class="shop-arrow">›</span>
 </a>
 <div aria-label="Status for Warm aviator sunglasses" class="seg compact" role="group">
-<button data-set="own" type="button">Already own</button>
-<button data-set="need" type="button">Need</button>
+<label class="status-choice">
+<input data-set="own" type="checkbox" />
+<span>Already own</span>
+</label>
+<label class="status-choice">
+<input data-set="need" type="checkbox" />
+<span>Need</span>
+</label>
 </div>
 </div>
 <div class="shop-row" data-item="belt">
@@ -243,8 +296,14 @@ h1{font-size:clamp(2rem,8vw,3.25rem);line-height:1.03;margin:.35rem 0 .8rem;lett
 <span class="shop-arrow">›</span>
 </a>
 <div aria-label="Status for Black belt" class="seg compact" role="group">
-<button data-set="own" type="button">Already own</button>
-<button data-set="need" type="button">Need</button>
+<label class="status-choice">
+<input data-set="own" type="checkbox" />
+<span>Already own</span>
+</label>
+<label class="status-choice">
+<input data-set="need" type="checkbox" />
+<span>Need</span>
+</label>
 </div>
 </div>
 <div class="shop-row" data-item="necklaces">
@@ -253,8 +312,14 @@ h1{font-size:clamp(2rem,8vw,3.25rem);line-height:1.03;margin:.35rem 0 .8rem;lett
 <span class="shop-arrow">›</span>
 </a>
 <div aria-label="Status for Nickel-free layered necklace look" class="seg compact" role="group">
-<button data-set="own" type="button">Already own</button>
-<button data-set="need" type="button">Need</button>
+<label class="status-choice">
+<input data-set="own" type="checkbox" />
+<span>Already own</span>
+</label>
+<label class="status-choice">
+<input data-set="need" type="checkbox" />
+<span>Need</span>
+</label>
 </div>
 </div>
 <div class="shop-row" data-item="watch">
@@ -263,8 +328,14 @@ h1{font-size:clamp(2rem,8vw,3.25rem);line-height:1.03;margin:.35rem 0 .8rem;lett
 <span class="shop-arrow">›</span>
 </a>
 <div aria-label="Status for Black-strap watch" class="seg compact" role="group">
-<button data-set="own" type="button">Already own</button>
-<button data-set="need" type="button">Need</button>
+<label class="status-choice">
+<input data-set="own" type="checkbox" />
+<span>Already own</span>
+</label>
+<label class="status-choice">
+<input data-set="need" type="checkbox" />
+<span>Need</span>
+</label>
 </div>
 </div></div>
 <button class="clear-btn" id="clearStatuses" type="button">Clear saved statuses</button>
@@ -296,8 +367,14 @@ h1{font-size:clamp(2rem,8vw,3.25rem);line-height:1.03;margin:.35rem 0 .8rem;lett
 <div class="status-control">
 <span>Your status</span>
 <div aria-label="Status for Colorblock sweater" class="seg" role="group">
-<button data-set="own" type="button">Already own</button>
-<button data-set="need" type="button">Need</button>
+<label class="status-choice">
+<input data-set="own" type="checkbox" />
+<span>Already own</span>
+</label>
+<label class="status-choice">
+<input data-set="need" type="checkbox" />
+<span>Need</span>
+</label>
 </div>
 </div>
 <div class="info-grid">
@@ -356,8 +433,14 @@ h1{font-size:clamp(2rem,8vw,3.25rem);line-height:1.03;margin:.35rem 0 .8rem;lett
 <div class="status-control">
 <span>Your status</span>
 <div aria-label="Status for medium-wash straight-leg jeans" class="seg" role="group">
-<button data-set="own" type="button">Already own</button>
-<button data-set="need" type="button">Need</button>
+<label class="status-choice">
+<input data-set="own" type="checkbox" />
+<span>Already own</span>
+</label>
+<label class="status-choice">
+<input data-set="need" type="checkbox" />
+<span>Need</span>
+</label>
 </div>
 </div>
 <div class="info-grid">
@@ -405,8 +488,14 @@ h1{font-size:clamp(2rem,8vw,3.25rem);line-height:1.03;margin:.35rem 0 .8rem;lett
 <div class="status-control">
 <span>Your status</span>
 <div aria-label="Status for black pointed-toe flats without a bow" class="seg" role="group">
-<button data-set="own" type="button">Already own</button>
-<button data-set="need" type="button">Need</button>
+<label class="status-choice">
+<input data-set="own" type="checkbox" />
+<span>Already own</span>
+</label>
+<label class="status-choice">
+<input data-set="need" type="checkbox" />
+<span>Need</span>
+</label>
 </div>
 </div>
 <div class="info-grid">
@@ -454,8 +543,14 @@ h1{font-size:clamp(2rem,8vw,3.25rem);line-height:1.03;margin:.35rem 0 .8rem;lett
 <div class="status-control">
 <span>Your status</span>
 <div aria-label="Status for nickel-free black geometric earrings" class="seg" role="group">
-<button data-set="own" type="button">Already own</button>
-<button data-set="need" type="button">Need</button>
+<label class="status-choice">
+<input data-set="own" type="checkbox" />
+<span>Already own</span>
+</label>
+<label class="status-choice">
+<input data-set="need" type="checkbox" />
+<span>Need</span>
+</label>
 </div>
 </div>
 <div class="info-grid">
@@ -503,8 +598,14 @@ h1{font-size:clamp(2rem,8vw,3.25rem);line-height:1.03;margin:.35rem 0 .8rem;lett
 <div class="status-control">
 <span>Your status</span>
 <div aria-label="Status for Colorblock crossbody bag" class="seg" role="group">
-<button data-set="own" type="button">Already own</button>
-<button data-set="need" type="button">Need</button>
+<label class="status-choice">
+<input data-set="own" type="checkbox" />
+<span>Already own</span>
+</label>
+<label class="status-choice">
+<input data-set="need" type="checkbox" />
+<span>Need</span>
+</label>
 </div>
 </div>
 <div class="info-grid">
@@ -563,8 +664,14 @@ h1{font-size:clamp(2rem,8vw,3.25rem);line-height:1.03;margin:.35rem 0 .8rem;lett
 <div class="status-control">
 <span>Your status</span>
 <div aria-label="Status for Warm aviator sunglasses" class="seg" role="group">
-<button data-set="own" type="button">Already own</button>
-<button data-set="need" type="button">Need</button>
+<label class="status-choice">
+<input data-set="own" type="checkbox" />
+<span>Already own</span>
+</label>
+<label class="status-choice">
+<input data-set="need" type="checkbox" />
+<span>Need</span>
+</label>
 </div>
 </div>
 <div class="info-grid">
@@ -623,8 +730,14 @@ h1{font-size:clamp(2rem,8vw,3.25rem);line-height:1.03;margin:.35rem 0 .8rem;lett
 <div class="status-control">
 <span>Your status</span>
 <div aria-label="Status for Black belt" class="seg" role="group">
-<button data-set="own" type="button">Already own</button>
-<button data-set="need" type="button">Need</button>
+<label class="status-choice">
+<input data-set="own" type="checkbox" />
+<span>Already own</span>
+</label>
+<label class="status-choice">
+<input data-set="need" type="checkbox" />
+<span>Need</span>
+</label>
 </div>
 </div>
 <div class="info-grid">
@@ -683,8 +796,14 @@ h1{font-size:clamp(2rem,8vw,3.25rem);line-height:1.03;margin:.35rem 0 .8rem;lett
 <div class="status-control">
 <span>Your status</span>
 <div aria-label="Status for nickel-free layered necklace look" class="seg" role="group">
-<button data-set="own" type="button">Already own</button>
-<button data-set="need" type="button">Need</button>
+<label class="status-choice">
+<input data-set="own" type="checkbox" />
+<span>Already own</span>
+</label>
+<label class="status-choice">
+<input data-set="need" type="checkbox" />
+<span>Need</span>
+</label>
 </div>
 </div>
 <div class="info-grid">
@@ -732,8 +851,14 @@ h1{font-size:clamp(2rem,8vw,3.25rem);line-height:1.03;margin:.35rem 0 .8rem;lett
 <div class="status-control">
 <span>Your status</span>
 <div aria-label="Status for Black-strap watch" class="seg" role="group">
-<button data-set="own" type="button">Already own</button>
-<button data-set="need" type="button">Need</button>
+<label class="status-choice">
+<input data-set="own" type="checkbox" />
+<span>Already own</span>
+</label>
+<label class="status-choice">
+<input data-set="need" type="checkbox" />
+<span>Need</span>
+</label>
 </div>
 </div>
 <div class="info-grid">
@@ -788,64 +913,60 @@ h1{font-size:clamp(2rem,8vw,3.25rem);line-height:1.03;margin:.35rem 0 .8rem;lett
 
 
 <div style="text-align:center;font-size:11px;opacity:.45;padding:10px">Style Card V10</div>
-
 <script>
 (function () {
-  const STORAGE_KEY = "camel-black-weekend-style-card-status-v12";
+  const STORAGE_KEY = "camel-black-weekend-style-card-status-v13";
 
-  function loadState() {
+  function readState() {
     try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}"); }
-    catch (e) { return {}; }
+    catch (_) { return {}; }
   }
 
-  function saveState(state) {
+  function writeState(state) {
     try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); }
-    catch (e) {}
+    catch (_) {}
   }
 
-  function groupKey(group) {
-    // The same aria-label appears in both the glance section and the detailed section,
-    // so this keeps the two controls synchronized.
+  function keyFor(group) {
     return group.getAttribute("aria-label") || "";
   }
 
-  function paintAll(key, value) {
+  function setGroupEverywhere(key, value) {
     document.querySelectorAll(".seg[aria-label]").forEach(function (group) {
-      if (groupKey(group) !== key) return;
-
-      group.querySelectorAll("button[data-set]").forEach(function (btn) {
-        const choice = btn.getAttribute("data-set");
-        const active = choice === value;
-
-        btn.classList.toggle("active-own", active && choice === "own");
-        btn.classList.toggle("active-need", active && choice === "need");
-        btn.setAttribute("aria-pressed", active ? "true" : "false");
+      if (keyFor(group) !== key) return;
+      group.querySelectorAll('input[type="checkbox"][data-set]').forEach(function (input) {
+        input.checked = (value !== "" && input.getAttribute("data-set") === value);
       });
     });
   }
 
   document.addEventListener("DOMContentLoaded", function () {
-    const state = loadState();
+    const state = readState();
 
+    // Restore saved values.
     document.querySelectorAll(".seg[aria-label]").forEach(function (group) {
-      const key = groupKey(group);
-      paintAll(key, state[key] || "");
+      const key = keyFor(group);
+      setGroupEverywhere(key, state[key] || "");
+    });
 
-      group.querySelectorAll("button[data-set]").forEach(function (btn) {
-        btn.addEventListener("click", function () {
-          const clicked = btn.getAttribute("data-set");
-          const current = state[key] || "";
+    // Native checkbox "change" fires both when checking and unchecking.
+    document.querySelectorAll('.seg[aria-label] input[type="checkbox"][data-set]').forEach(function (input) {
+      input.addEventListener("change", function () {
+        const group = input.closest(".seg");
+        const key = keyFor(group);
+        const value = input.getAttribute("data-set");
 
-          if (current === clicked) {
-            delete state[key];       // tapping the selected button again clears it
-            paintAll(key, "");
-          } else {
-            state[key] = clicked;    // selecting one automatically clears the other
-            paintAll(key, clicked);
-          }
+        if (input.checked) {
+          // This choice is on: turn the other choice off everywhere.
+          state[key] = value;
+          setGroupEverywhere(key, value);
+        } else {
+          // The selected choice was tapped again: return to neither selected.
+          delete state[key];
+          setGroupEverywhere(key, "");
+        }
 
-          saveState(state);
-        });
+        writeState(state);
       });
     });
 
@@ -853,10 +974,9 @@ h1{font-size:clamp(2rem,8vw,3.25rem);line-height:1.03;margin:.35rem 0 .8rem;lett
     if (clearButton) {
       clearButton.addEventListener("click", function () {
         Object.keys(state).forEach(function (key) { delete state[key]; });
-        saveState(state);
-
+        writeState(state);
         document.querySelectorAll(".seg[aria-label]").forEach(function (group) {
-          paintAll(groupKey(group), "");
+          setGroupEverywhere(keyFor(group), "");
         });
       });
     }
@@ -864,7 +984,6 @@ h1{font-size:clamp(2rem,8vw,3.25rem);line-height:1.03;margin:.35rem 0 .8rem;lett
 })();
 </script>
 
-
-<div style="text-align:center;font-size:11px;opacity:.45;padding:10px">Style Card V12</div>
+<div style="text-align:center;font-size:11px;opacity:.45;padding:10px">Style Card V13</div>
 </body>
 </html>
