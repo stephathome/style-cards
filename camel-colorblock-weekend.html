@@ -788,9 +788,10 @@ h1{font-size:clamp(2rem,8vw,3.25rem);line-height:1.03;margin:.35rem 0 .8rem;lett
 
 
 <div style="text-align:center;font-size:11px;opacity:.45;padding:10px">Style Card V10</div>
+
 <script>
 (function () {
-  const STORAGE_KEY = "camel-black-weekend-style-card-status-v11";
+  const STORAGE_KEY = "camel-black-weekend-style-card-status-v12";
 
   function loadState() {
     try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}"); }
@@ -802,41 +803,68 @@ h1{font-size:clamp(2rem,8vw,3.25rem);line-height:1.03;margin:.35rem 0 .8rem;lett
     catch (e) {}
   }
 
-  function paint(group, value) {
-    group.querySelectorAll("button[data-value]").forEach(function (btn) {
-      const active = btn.dataset.value === value;
-      btn.classList.toggle("active", active);
-      btn.setAttribute("aria-pressed", active ? "true" : "false");
+  function groupKey(group) {
+    // The same aria-label appears in both the glance section and the detailed section,
+    // so this keeps the two controls synchronized.
+    return group.getAttribute("aria-label") || "";
+  }
+
+  function paintAll(key, value) {
+    document.querySelectorAll(".seg[aria-label]").forEach(function (group) {
+      if (groupKey(group) !== key) return;
+
+      group.querySelectorAll("button[data-set]").forEach(function (btn) {
+        const choice = btn.getAttribute("data-set");
+        const active = choice === value;
+
+        btn.classList.toggle("active-own", active && choice === "own");
+        btn.classList.toggle("active-need", active && choice === "need");
+        btn.setAttribute("aria-pressed", active ? "true" : "false");
+      });
     });
   }
 
   document.addEventListener("DOMContentLoaded", function () {
     const state = loadState();
 
-    document.querySelectorAll(".seg[data-key]").forEach(function (group) {
-      const key = group.dataset.key;
-      paint(group, state[key] || "");
+    document.querySelectorAll(".seg[aria-label]").forEach(function (group) {
+      const key = groupKey(group);
+      paintAll(key, state[key] || "");
 
-      group.querySelectorAll("button[data-value]").forEach(function (btn) {
+      group.querySelectorAll("button[data-set]").forEach(function (btn) {
         btn.addEventListener("click", function () {
-          const clicked = btn.dataset.value;
+          const clicked = btn.getAttribute("data-set");
           const current = state[key] || "";
 
           if (current === clicked) {
-            delete state[key];              // tap selected choice again = unselect
-            paint(group, "");
+            delete state[key];       // tapping the selected button again clears it
+            paintAll(key, "");
           } else {
-            state[key] = clicked;           // choose/switch state
-            paint(group, clicked);
+            state[key] = clicked;    // selecting one automatically clears the other
+            paintAll(key, clicked);
           }
+
           saveState(state);
         });
       });
     });
+
+    const clearButton = document.getElementById("clearStatuses");
+    if (clearButton) {
+      clearButton.addEventListener("click", function () {
+        Object.keys(state).forEach(function (key) { delete state[key]; });
+        saveState(state);
+
+        document.querySelectorAll(".seg[aria-label]").forEach(function (group) {
+          paintAll(groupKey(group), "");
+        });
+      });
+    }
   });
 })();
 </script>
 
-<div style="text-align:center;font-size:11px;opacity:.45;padding:10px">Style Card V11</div>
+
+<div style="text-align:center;font-size:11px;opacity:.45;padding:10px">Style Card V12</div>
 </body>
 </html>
