@@ -783,65 +783,60 @@ h1{font-size:clamp(2rem,8vw,3.25rem);line-height:1.03;margin:.35rem 0 .8rem;lett
   </footer>
 </main>
 <div class="toast" id="toast">Copied search term</div>
+
+
+
+
+<div style="text-align:center;font-size:11px;opacity:.45;padding:10px">Style Card V10</div>
 <script>
-(() => {
-  const keyPrefix = 'stylecard.camel-black-weekend.';
-  const allContainers = [...document.querySelectorAll('[data-item]')];
+(function () {
+  const STORAGE_KEY = "camel-black-weekend-style-card-status-v11";
 
-  function setStatus(item, value) {
-    localStorage.setItem(keyPrefix + item, value);
-    sync(item, value);
+  function loadState() {
+    try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}"); }
+    catch (e) { return {}; }
   }
-  function sync(item, value) {
-    document.querySelectorAll('[data-item="' + item + '"] .seg button').forEach(btn => {
-      btn.classList.remove('active-own','active-need');
-      if (btn.dataset.set === value) btn.classList.add(value === 'own' ? 'active-own' : 'active-need');
-      btn.setAttribute('aria-pressed', btn.dataset.set === value ? 'true' : 'false');
+
+  function saveState(state) {
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); }
+    catch (e) {}
+  }
+
+  function paint(group, value) {
+    group.querySelectorAll("button[data-value]").forEach(function (btn) {
+      const active = btn.dataset.value === value;
+      btn.classList.toggle("active", active);
+      btn.setAttribute("aria-pressed", active ? "true" : "false");
     });
   }
-  document.querySelectorAll('[data-item] .seg button').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const item = btn.closest('[data-item]').dataset.item;
-      setStatus(item, btn.dataset.set);
-    });
-  });
-  [...new Set(allContainers.map(el => el.dataset.item))].forEach(item => {
-    const saved = localStorage.getItem(keyPrefix + item);
-    if (saved) sync(item, saved);
-  });
-  document.getElementById('clearStatuses').addEventListener('click', () => {
-    [...new Set(allContainers.map(el => el.dataset.item))].forEach(item => {
-      localStorage.removeItem(keyPrefix + item);
-      document.querySelectorAll('[data-item="' + item + '"] .seg button').forEach(btn => {
-        btn.classList.remove('active-own','active-need');
-        btn.setAttribute('aria-pressed','false');
+
+  document.addEventListener("DOMContentLoaded", function () {
+    const state = loadState();
+
+    document.querySelectorAll(".seg[data-key]").forEach(function (group) {
+      const key = group.dataset.key;
+      paint(group, state[key] || "");
+
+      group.querySelectorAll("button[data-value]").forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          const clicked = btn.dataset.value;
+          const current = state[key] || "";
+
+          if (current === clicked) {
+            delete state[key];              // tap selected choice again = unselect
+            paint(group, "");
+          } else {
+            state[key] = clicked;           // choose/switch state
+            paint(group, clicked);
+          }
+          saveState(state);
+        });
       });
-    });
-  });
-
-  const toast = document.getElementById('toast');
-  let toastTimer;
-  document.querySelectorAll('.copy-btn').forEach(btn => {
-    btn.addEventListener('click', async () => {
-      try {
-        await navigator.clipboard.writeText(btn.dataset.copy);
-      } catch (e) {
-        const ta = document.createElement('textarea');
-        ta.value = btn.dataset.copy;
-        document.body.appendChild(ta);
-        ta.select();
-        document.execCommand('copy');
-        ta.remove();
-      }
-      toast.classList.add('show');
-      clearTimeout(toastTimer);
-      toastTimer = setTimeout(() => toast.classList.remove('show'), 1300);
     });
   });
 })();
 </script>
 
-
-
-<div style="text-align:center;font-size:11px;opacity:.45;padding:10px">Style Card V10</div></body>
+<div style="text-align:center;font-size:11px;opacity:.45;padding:10px">Style Card V11</div>
+</body>
 </html>
