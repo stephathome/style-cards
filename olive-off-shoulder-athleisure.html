@@ -54,9 +54,14 @@ h3{font-size:1rem;margin:0 0 7px}
 .price-card strong{display:block;font-size:1.15rem;margin:4px 0}
 .price-card span{font-size:.8rem;color:#6a6259}
 .research-note{font-size:.86rem;color:#655c52}
-.shop-row{display:grid;gap:9px;margin:14px 0}
-.shop{display:flex;align-items:center;justify-content:center;min-height:50px;border-radius:14px;text-decoration:none;font-weight:900}
-.shop.primary{background:var(--ink);color:white}
+.shopping-links{margin:16px 0}
+.shopping-links h3{margin:0 0 9px;font-size:1rem}
+.shop-row{display:grid;gap:9px;margin:0}
+.shop{display:flex;align-items:center;justify-content:space-between;gap:10px;min-height:52px;padding:0 15px;border-radius:14px;text-decoration:none;font-weight:900;border:1px solid var(--line)}
+.shop:after{content:"›";font-size:1.45rem;line-height:1}
+.shop.primary{background:var(--ink);color:white;border-color:var(--ink)}
+.shop.secondary{background:#f4efe8;color:var(--ink)}
+.shop small{font-weight:700;color:inherit;opacity:.72}
 .info-grid{display:grid;gap:10px}
 .info{padding:14px;border:1px solid var(--line);border-radius:15px}
 .info p{margin:0;color:#4b453e}
@@ -65,9 +70,10 @@ h3{font-size:1rem;margin:0 0 7px}
 .copy{position:absolute;right:10px;top:50%;transform:translateY(-15%);min-width:64px;min-height:40px;border:0;border-radius:12px;background:#d4bb98;font-weight:900}
 .alternatives{margin-top:16px}
 .alternatives ul{margin:0;padding:0;list-style:none;display:grid;gap:8px}
-.alternatives li{padding:12px;border:1px solid var(--line);border-radius:13px}
-.alternatives a{font-weight:900}
-.alternatives span{display:block;color:#6c645b;font-size:.86rem;margin-top:3px}
+.alternatives li{padding:0;border:1px solid var(--line);border-radius:13px;overflow:hidden;background:#fff}
+.alternatives a{display:flex;align-items:center;justify-content:space-between;min-height:48px;padding:11px 13px;font-weight:900;text-decoration:none;background:#f8f4ee}
+.alternatives a:after{content:"›";font-size:1.35rem}
+.alternatives span{display:block;color:#6c645b;font-size:.86rem;padding:8px 13px 11px}
 .footer-note{margin-top:26px;color:#6b6258;font-size:.85rem;text-align:center}
 @media(min-width:620px){.glance{grid-template-columns:repeat(3,1fr)}.info-grid{grid-template-columns:1fr 1fr}}
 </style>
@@ -203,7 +209,7 @@ h3{font-size:1rem;margin:0 0 7px}
         <div><small>GOOD-BUY TARGET</small><strong>$25 or less</strong></div>
       </div>
       <p class="research-note">The brand site showed $17.99 sale pricing (regular $29.99) when researched; Amazon pricing may differ. <b>Last researched: August 29, 2026.</b></p>
-      <div class="shop-row"><a class="shop primary" href="https://www.easygalashirts.com/product/womens-fleece-sweatshirts-oversized-off-the-shoulder-pullover-tops-casual-long-sleeve-comfy-fall-outfits-2026army-green/" target="_blank" rel="noopener">View at EasyGala</a></div>
+      <div class="shopping-links"><h3>Shopping Links</h3><div class="shop-row"><a class="shop primary" href="https://www.easygalashirts.com/product/womens-fleece-sweatshirts-oversized-off-the-shoulder-pullover-tops-casual-long-sleeve-comfy-fall-outfits-2026army-green/" target="_blank" rel="noopener">View at EasyGala</a></div></div>
 
       <div class="info-grid">
         <div class="info"><h3>Shopping Call</h3><p>Current brand-site sale is a good buy.</p></div>
@@ -240,7 +246,7 @@ h3{font-size:1rem;margin:0 0 7px}
         <div><small>GOOD-BUY TARGET</small><strong>$30 or less</strong></div>
       </div>
       <p class="research-note">The current '47 camo CLEAN UP is a relaxed, garment-washed cotton-twill strapback. The exact camo pattern may differ slightly from the screenshot. <b>Last researched: August 29, 2026.</b></p>
-      <div class="shop-row"><a class="shop primary" href="https://www.47brand.com/products/new-york-yankees-camo-47-clean-up-2" target="_blank" rel="noopener">View at '47</a></div>
+      <div class="shopping-links"><h3>Shopping Links</h3><div class="shop-row"><a class="shop primary" href="https://www.47brand.com/products/new-york-yankees-camo-47-clean-up-2" target="_blank" rel="noopener">View at '47</a></div></div>
 
       <div class="info-grid">
         <div class="info"><h3>Shopping Call</h3><p>Similar is fine; the relaxed camo silhouette matters more than an exact print match.</p></div>
@@ -277,7 +283,7 @@ h3{font-size:1rem;margin:0 0 7px}
         <div><small>GOOD-BUY TARGET</small><strong>$40 or less</strong></div>
       </div>
       <p class="research-note">A current Amazon-fulfilled listing was shown in stock at $46.98. Color and size can change the price. <b>Last researched: August 29, 2026.</b></p>
-      <div class="shop-row"><a class="shop primary" href="https://www.shopabunda.com/products/lifeshe-women-s-casual-detachable-hoodie-denim-jacket-dbb835d2-802d-42c1-b357-9717812039ca" target="_blank" rel="noopener">View current listing</a></div>
+      <div class="shopping-links"><h3>Shopping Links</h3><div class="shop-row"><a class="shop primary" href="https://www.shopabunda.com/products/lifeshe-women-s-casual-detachable-hoodie-denim-jacket-dbb835d2-802d-42c1-b357-9717812039ca" target="_blank" rel="noopener">View current listing</a></div></div>
 
       <div class="info-grid">
         <div class="info"><h3>Shopping Call</h3><p>Worth buying exact if you want the layered hoodie-and-denim look in one piece.</p></div>
@@ -314,7 +320,7 @@ h3{font-size:1rem;margin:0 0 7px}
         <div><small>GOOD-BUY TARGET</small><strong>$25 or less</strong></div>
       </div>
       <p class="research-note">Recent references place these around the high-$20s, but I could not reliably verify a live direct-retailer price for the exact black jogger at build time. <b>Last researched: August 29, 2026.</b></p>
-      <div class="shop-row"><a class="shop primary" href="https://www.amazon.com/s?k=THE+GYM+PEOPLE+women+joggers+black+lightweight+tapered" target="_blank" rel="noopener">Search Amazon</a></div>
+      <div class="shopping-links"><h3>Shopping Links</h3><div class="shop-row"><a class="shop primary" href="https://www.amazon.com/s?k=THE+GYM+PEOPLE+women+joggers+black+lightweight+tapered" target="_blank" rel="noopener">Search Amazon</a></div></div>
 
       <div class="info-grid">
         <div class="info"><h3>Shopping Call</h3><p>Easy place to save money; prioritize fit and fabric over brand.</p></div>
@@ -351,7 +357,7 @@ h3{font-size:1rem;margin:0 0 7px}
         <div><small>GOOD-BUY TARGET</small><strong>$55 or less</strong></div>
       </div>
       <p class="research-note">Nike showed the Waffle Debut at $47.97 (regular $75) in a neutral black-accent colorway. Nike notes the shoe fits small and recommends going up a half size. <b>Last researched: August 29, 2026.</b></p>
-      <div class="shop-row"><a class="shop primary" href="https://www.nike.com/t/waffle-debut-womens-shoes-5Rl1KL" target="_blank" rel="noopener">View at Nike</a></div>
+      <div class="shopping-links"><h3>Shopping Links</h3><div class="shop-row"><a class="shop primary" href="https://www.nike.com/t/waffle-debut-womens-shoes-5Rl1KL" target="_blank" rel="noopener">View at Nike</a></div></div>
 
       <div class="info-grid">
         <div class="info"><h3>Shopping Call</h3><p>Current Nike sale is strong; buy if your size is available.</p></div>
@@ -388,7 +394,7 @@ h3{font-size:1rem;margin:0 0 7px}
         <div><small>GOOD-BUY TARGET</small><strong>$40 or less</strong></div>
       </div>
       <p class="research-note">Walmart Business listed the 3.5L size at $38.79 in current search results; color-specific pricing may vary. <b>Last researched: August 29, 2026.</b></p>
-      <div class="shop-row"><a class="shop primary" href="https://www.walmart.com/ip/20445905110" target="_blank" rel="noopener">View at Walmart</a></div>
+      <div class="shopping-links"><h3>Shopping Links</h3><div class="shop-row"><a class="shop primary" href="https://www.walmart.com/ip/20445905110" target="_blank" rel="noopener">View at Walmart</a></div></div>
 
       <div class="info-grid">
         <div class="info"><h3>Shopping Call</h3><p>Good buy around $40; no need to pay close to $50 unless the exact black version is scarce.</p></div>
@@ -425,7 +431,7 @@ h3{font-size:1rem;margin:0 0 7px}
         <div><small>GOOD-BUY TARGET</small><strong>$35 or less for sterling silver moissanite studs</strong></div>
       </div>
       <p class="research-note">The pictured IMLOVE studs were not independently confirmed nickel-free. I substituted a visually similar listing that explicitly states the earrings are nickel-free and uses 925 sterling silver with push backs. <b>Last researched: August 29, 2026.</b></p>
-      <div class="shop-row"><a class="shop primary" href="https://www.etsy.com/ca/listing/4514203459/moissanite-stud-earrings-2ct-8mm-vvs1" target="_blank" rel="noopener">View nickel-free option on Etsy</a></div>
+      <div class="shopping-links"><h3>Shopping Links</h3><div class="shop-row"><a class="shop primary" href="https://www.etsy.com/ca/listing/4514203459/moissanite-stud-earrings-2ct-8mm-vvs1" target="_blank" rel="noopener">View nickel-free option on Etsy</a></div></div>
 
       <div class="info-grid">
         <div class="info"><h3>Shopping Call</h3><p>Use the verified nickel-free substitute rather than chasing the exact screenshot pair.</p></div>
@@ -462,7 +468,7 @@ h3{font-size:1rem;margin:0 0 7px}
         <div><small>GOOD-BUY TARGET</small><strong>$70 or less</strong></div>
       </div>
       <p class="research-note">DIFF listed Lenox at $64, reduced from $128, with polarized lenses and 100% UVA/UVB protection. <b>Last researched: August 29, 2026.</b></p>
-      <div class="shop-row"><a class="shop primary" href="https://www.diffeyewear.com/products/lenox-gold-brown-gradient-mirror-polarized" target="_blank" rel="noopener">View at DIFF</a></div>
+      <div class="shopping-links"><h3>Shopping Links</h3><div class="shop-row"><a class="shop primary" href="https://www.diffeyewear.com/products/lenox-gold-brown-gradient-mirror-polarized" target="_blank" rel="noopener">View at DIFF</a></div></div>
 
       <div class="info-grid">
         <div class="info"><h3>Shopping Call</h3><p>Current sale is good. Similar is fine if you already own a gold aviator.</p></div>
@@ -499,7 +505,7 @@ h3{font-size:1rem;margin:0 0 7px}
         <div><small>GOOD-BUY TARGET</small><strong>$45 or less</strong></div>
       </div>
       <p class="research-note">Kate Spade lists the pendant at $58 in gold-plated metal. The product page does not explicitly confirm nickel-free chain, clasp, or skin-contact components. <b>Last researched: August 29, 2026.</b></p>
-      <div class="shop-row"><a class="shop primary" href="https://www.katespade.com/products/initial-pendant/WBRU7649.html" target="_blank" rel="noopener">View at Kate Spade</a></div>
+      <div class="shopping-links"><h3>Shopping Links</h3><div class="shop-row"><a class="shop primary" href="https://www.katespade.com/products/initial-pendant/WBRU7649.html" target="_blank" rel="noopener">View at Kate Spade</a></div></div>
 
       <div class="info-grid">
         <div class="info"><h3>Shopping Call</h3><p>Wait for a sale unless you specifically want Kate Spade. Do not treat it as confirmed nickel-free.</p></div>
