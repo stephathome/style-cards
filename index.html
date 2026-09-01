@@ -85,6 +85,13 @@ select{
   width:100%;min-height:44px;border:1px solid var(--line);border-radius:13px;
   padding:8px 34px 8px 11px;background:#fff;color:var(--ink)
 }
+.more-filters-toggle{
+  margin-top:10px;border:1px solid var(--line);background:#fff;color:#5f554c;
+  border-radius:12px;padding:9px 12px;font-weight:800
+}
+.more-filters-toggle[aria-expanded="true"]{background:#efe4d8;color:#4e3b2d}
+.more-filters{display:none;padding-top:10px}
+.more-filters.open{display:block}
 .filter-actions{
   display:flex;justify-content:space-between;align-items:center;gap:12px;
   margin-top:10px
@@ -226,7 +233,7 @@ h2{
       </div>
 
       <div class="filter-panel" id="filterPanel">
-        <div class="filters">
+        <div class="filters primary-filters">
           <div class="filter-group">
             <label for="seasonFilter">Season</label>
             <select id="seasonFilter"><option value="">All seasons</option></select>
@@ -236,19 +243,50 @@ h2{
             <select id="occasionFilter"><option value="">All occasions</option></select>
           </div>
           <div class="filter-group">
-            <label for="categoryFilter">Piece</label>
-            <select id="categoryFilter"><option value="">All pieces</option></select>
+            <label for="colorFilter">Color</label>
+            <select id="colorFilter"><option value="">All colors</option></select>
           </div>
           <div class="filter-group">
-            <label for="sort">Sort</label>
-            <select id="sort">
-              <option value="newest">Newest first</option>
-              <option value="oldest">Oldest first</option>
-              <option value="az">Name A–Z</option>
-              <option value="za">Name Z–A</option>
-            </select>
+            <label for="styleFilter">Style</label>
+            <select id="styleFilter"><option value="">All styles</option></select>
           </div>
         </div>
+
+        <button class="more-filters-toggle" id="moreFiltersToggle" type="button"
+                aria-expanded="false" aria-controls="moreFilters">
+          More Filters
+        </button>
+
+        <div class="more-filters" id="moreFilters">
+          <div class="filters">
+            <div class="filter-group">
+              <label for="categoryFilter">Piece</label>
+              <select id="categoryFilter"><option value="">All pieces</option></select>
+            </div>
+            <div class="filter-group">
+              <label for="patternFilter">Pattern</label>
+              <select id="patternFilter"><option value="">All patterns</option></select>
+            </div>
+            <div class="filter-group">
+              <label for="dressLevelFilter">Dress Level</label>
+              <select id="dressLevelFilter"><option value="">All dress levels</option></select>
+            </div>
+            <div class="filter-group">
+              <label for="temperatureFilter">Temperature</label>
+              <select id="temperatureFilter"><option value="">All temperatures</option></select>
+            </div>
+            <div class="filter-group">
+              <label for="sort">Sort</label>
+              <select id="sort">
+                <option value="newest">Newest first</option>
+                <option value="oldest">Oldest first</option>
+                <option value="az">Name A–Z</option>
+                <option value="za">Name Z–A</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
         <div class="filter-actions">
           <button class="clear" id="clearFilters" type="button">Clear filters</button>
           <div class="view-buttons" aria-label="Card size">
@@ -296,7 +334,12 @@ h2{
     search: document.getElementById("search"),
     season: document.getElementById("seasonFilter"),
     occasion: document.getElementById("occasionFilter"),
+    color: document.getElementById("colorFilter"),
+    style: document.getElementById("styleFilter"),
     category: document.getElementById("categoryFilter"),
+    pattern: document.getElementById("patternFilter"),
+    dressLevel: document.getElementById("dressLevelFilter"),
+    temperature: document.getElementById("temperatureFilter"),
     sort: document.getElementById("sort"),
     count: document.getElementById("resultCount"),
     status: document.getElementById("libraryStatus"),
@@ -306,6 +349,8 @@ h2{
     empty: document.getElementById("emptyState"),
     toggle: document.getElementById("filterToggle"),
     panel: document.getElementById("filterPanel"),
+    moreToggle: document.getElementById("moreFiltersToggle"),
+    morePanel: document.getElementById("moreFilters"),
     clear: document.getElementById("clearFilters"),
     large: document.getElementById("largeView"),
     compact: document.getElementById("compactView"),
@@ -399,7 +444,9 @@ h2{
     const m = c.meta;
     return norm([
       m.name, m.description, m.id,
-      ...(m.seasons||[]), ...(m.occasions||[]), ...(m.categories||[])
+      ...(m.seasons||[]), ...(m.occasions||[]), ...(m.categories||[]),
+      ...(m.styles||[]), ...(m.colors||[]), ...(m.patterns||[]),
+      m.dressLevel || "", ...(m.temperature||[])
     ].join(" "));
   }
 
@@ -407,15 +454,26 @@ h2{
     const q = norm(els.search.value);
     const season = norm(els.season.value);
     const occasion = norm(els.occasion.value);
+    const color = norm(els.color.value);
+    const style = norm(els.style.value);
     const category = norm(els.category.value);
+    const pattern = norm(els.pattern.value);
+    const dressLevel = norm(els.dressLevel.value);
+    const temperature = norm(els.temperature.value);
 
     let filtered = cards.filter(c => {
       const m = c.meta;
       const has = (arr,val) => !val || (arr||[]).some(x => norm(x) === val);
+      const scalar = (value,val) => !val || norm(value) === val;
       return (!q || searchable(c).includes(q)) &&
              has(m.seasons,season) &&
              has(m.occasions,occasion) &&
-             has(m.categories,category);
+             has(m.colors,color) &&
+             has(m.styles,style) &&
+             has(m.categories,category) &&
+             has(m.patterns,pattern) &&
+             scalar(m.dressLevel,dressLevel) &&
+             has(m.temperature,temperature);
     });
 
     const sort = els.sort.value;
@@ -434,7 +492,8 @@ h2{
   }
 
   function bind() {
-    [els.search,els.season,els.occasion,els.category,els.sort].forEach(el =>
+    [els.search,els.season,els.occasion,els.color,els.style,els.category,
+     els.pattern,els.dressLevel,els.temperature,els.sort].forEach(el =>
       el.addEventListener(el === els.search ? "input" : "change", render)
     );
 
@@ -445,11 +504,23 @@ h2{
       els.toggle.textContent = open ? "Close" : "Filters";
     });
 
+    els.moreToggle.addEventListener("click", () => {
+      const open = !els.morePanel.classList.contains("open");
+      els.morePanel.classList.toggle("open", open);
+      els.moreToggle.setAttribute("aria-expanded", String(open));
+      els.moreToggle.textContent = open ? "Fewer Filters" : "More Filters";
+    });
+
     els.clear.addEventListener("click", () => {
       els.search.value = "";
       els.season.value = "";
       els.occasion.value = "";
+      els.color.value = "";
+      els.style.value = "";
       els.category.value = "";
+      els.pattern.value = "";
+      els.dressLevel.value = "";
+      els.temperature.value = "";
       els.sort.value = "newest";
       render();
     });
@@ -500,7 +571,15 @@ h2{
 
       fillSelect(els.season, uniqueValues("seasons"), "All seasons");
       fillSelect(els.occasion, uniqueValues("occasions"), "All occasions");
+      fillSelect(els.color, uniqueValues("colors"), "All colors");
+      fillSelect(els.style, uniqueValues("styles"), "All styles");
       fillSelect(els.category, uniqueValues("categories"), "All pieces");
+      fillSelect(els.pattern, uniqueValues("patterns"), "All patterns");
+      fillSelect(els.dressLevel,
+        [...new Set(cards.map(c => c.meta.dressLevel).filter(Boolean))]
+          .sort((a,b)=>a.localeCompare(b,undefined,{sensitivity:"base"})),
+        "All dress levels");
+      fillSelect(els.temperature, uniqueValues("temperature"), "All temperatures");
 
       els.progress.classList.add("hidden");
       els.status.textContent = "Library ready";
